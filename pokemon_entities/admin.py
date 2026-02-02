@@ -4,11 +4,21 @@ from .models import Pokemon, PokemonEntity
 
 @admin.register(Pokemon)
 class PokemonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'title_en', 'title_jp', 'show_image')
+    list_display = ('id', 'title', 'previous_evolution', 'show_image')
     list_display_links = ('title',)
+    list_filter = ('previous_evolution',)
     search_fields = ('title', 'title_en', 'title_jp')
     readonly_fields = ('show_image',)
-    fields = ('title', 'title_en', 'title_jp', 'image', 'description', 'show_image')
+
+    fields = (
+        'title',
+        'title_en',
+        'title_jp',
+        'previous_evolution',
+        'image',
+        'description',
+        'show_image'
+    )
 
     def show_image(self, obj):
         if obj.image:

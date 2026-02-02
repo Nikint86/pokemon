@@ -65,7 +65,6 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    # Получаем покемона из базы данных
     pokemon = get_object_or_404(Pokemon, id=pokemon_id)
 
     current_time = now()
@@ -89,10 +88,10 @@ def show_pokemon(request, pokemon_id):
     pokemon_data = {
         'pokemon_id': pokemon.id,
         'title_ru': pokemon.title,
-        'title_en': '',
-        'title_jp': '',
+        'title_en': pokemon.title_en,
+        'title_jp': pokemon.title_jp,
         'img_url': pokemon.image.url if pokemon.image else DEFAULT_IMAGE_URL,
-        'description': '',
+        'description': pokemon.description,
         'entities': []
     }
 
@@ -108,6 +107,21 @@ def show_pokemon(request, pokemon_id):
             'appeared_at': entity.appeared_at,
             'disappeared_at': entity.disappeared_at,
         })
+
+    if pokemon.previous_evolution:
+        pokemon_data['previous_evolution'] = {
+            'pokemon_id': pokemon.previous_evolution.id,
+            'title_ru': pokemon.previous_evolution.title,
+            'img_url': pokemon.previous_evolution.image.url if pokemon.previous_evolution.image else DEFAULT_IMAGE_URL,
+        }
+
+    next_evolutions = pokemon.next_evolutions.all()
+    if next_evolutions:
+        pokemon_data['next_evolution'] = {
+            'pokemon_id': next_evolutions[0].id,
+            'title_ru': next_evolutions[0].title,
+            'img_url': next_evolutions[0].image.url if next_evolutions[0].image else DEFAULT_IMAGE_URL,
+        }
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(),

@@ -1,12 +1,12 @@
-from django.db import models  # noqa F401
+from django.db import models
 
 class Pokemon(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     title_en = models.CharField(
         max_length=200,
         verbose_name='Английское название',
-        blank=True,  # может быть пустым
-        default=''  # значение по умолчанию
+        blank=True,
+        default=''
     )
     title_jp = models.CharField(
         max_length=200,
@@ -17,6 +17,14 @@ class Pokemon(models.Model):
     image = models.ImageField(upload_to='pokemon_images/', verbose_name='Изображение', null=True, blank=True)
     description = models.TextField(verbose_name='Описание', blank=True, default='')
 
+    previous_evolution = models.ForeignKey(
+        'self',  # ссылка на самого себя
+        on_delete=models.SET_NULL,  # если предка удалят, ставим NULL
+        null=True,
+        blank=True,
+        verbose_name='Из кого эволюционировал',
+        related_name='next_evolutions'
+    )
     class Meta:
         verbose_name = 'Покемон'
         verbose_name_plural = 'Покемоны'
