@@ -1,8 +1,21 @@
 from django.db import models  # noqa F401
 
 class Pokemon(models.Model):
-    title = models.CharField(max_length=200, verbose_name='Покемон')
+    title = models.CharField(max_length=200, verbose_name='Название')
+    title_en = models.CharField(
+        max_length=200,
+        verbose_name='Английское название',
+        blank=True,  # может быть пустым
+        default=''  # значение по умолчанию
+    )
+    title_jp = models.CharField(
+        max_length=200,
+        verbose_name='Японское название',
+        blank=True,
+        default=''
+    )
     image = models.ImageField(upload_to='pokemon_images/', verbose_name='Изображение', null=True, blank=True)
+    description = models.TextField(verbose_name='Описание', blank=True, default='')
 
     class Meta:
         verbose_name = 'Покемон'
