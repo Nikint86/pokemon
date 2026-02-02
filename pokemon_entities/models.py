@@ -32,6 +32,32 @@ class PokemonEntity(models.Model):
         blank=True
     )
 
+    level = models.IntegerField(
+        verbose_name='Уровень',
+        null=True,
+        blank=True
+    )
+    health = models.IntegerField(
+        verbose_name='Здоровье',
+        null=True,
+        blank=True
+    )
+    attack = models.IntegerField(
+        verbose_name='Атака',
+        null=True,
+        blank=True
+    )
+    defense = models.IntegerField(
+        verbose_name='Защита',
+        null=True,
+        blank=True
+    )
+    stamina = models.IntegerField(
+        verbose_name='Выносливость',
+        null=True,
+        blank=True
+    )
+
     class Meta:
         verbose_name = 'Покемон на карте'
         verbose_name_plural = 'Покемоны на карте'

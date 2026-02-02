@@ -24,17 +24,21 @@ class PokemonEntityAdmin(admin.ModelAdmin):
     list_filter = ('pokemon', 'appeared_at', 'disappeared_at')
     search_fields = ('pokemon__title',)
 
-
     fieldsets = (
         (None, {
             'fields': ('pokemon',)
         }),
+        ('Боевые характеристики', {
+            'fields': ('level', 'health', 'attack', 'defense', 'stamina'),
+            'description': 'Основные характеристики покемона'
+        }),
         ('Координаты', {
             'fields': ('lat', 'lon'),
-            'classes': ('wide',)
         }),
-        ('Время', {
-            'fields': ('appeared_at', 'disappeared_at'),
-            'classes': ('wide',)
+        ('Время появления', {
+            'fields': ('appeared_at',),
+        }),
+        ('Время исчезновения', {
+            'fields': ('disappeared_at',),
         }),
     )
