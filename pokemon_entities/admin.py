@@ -1,7 +1,26 @@
 from django.contrib import admin
-from .models import Pokemon
+from django.utils.html import format_html
+from .models import Pokemon, PokemonEntity
 
 @admin.register(Pokemon)
 class PokemonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title')
+    list_display = ('id', 'title', 'show_image')
+    list_display_links = ('title',)
     search_fields = ('title',)
+    readonly_fields = ('show_image',)
+    fields = ('title', 'image', 'show_image')
+
+    def show_image(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="100" />', obj.image.url)
+        return "Нет изображения"
+
+    show_image.short_description = 'Изображение'
+
+@admin.register(PokemonEntity)
+class PokemonEntityAdmin(admin.ModelAdmin):
+    list_display = ('id', 'pokemon', 'lat', 'lon')
+    list_display_links = ('pokemon',)
+    list_filter = ('pokemon',)
+    search_fields = ('pokemon__title',)
+    raw_id_fields = ('pokemon',)
