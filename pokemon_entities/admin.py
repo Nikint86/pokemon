@@ -23,4 +23,3 @@ class PokemonEntityAdmin(admin.ModelAdmin):
     list_display_links = ('pokemon',)
     list_filter = ('pokemon',)
     search_fields = ('pokemon__title',)
-    raw_id_fields = ('pokemon',)
