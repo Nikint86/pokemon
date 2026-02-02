@@ -6,16 +6,18 @@ class Pokemon(models.Model):
         max_length=200,
         verbose_name='Английское название',
         blank=True,
-        default=''
+        null=True,
+        default=None
     )
     title_jp = models.CharField(
         max_length=200,
         verbose_name='Японское название',
         blank=True,
-        default=''
+        null=True,
+        default=None
     )
     image = models.ImageField(upload_to='pokemon_images/', verbose_name='Изображение', null=True, blank=True)
-    description = models.TextField(verbose_name='Описание', blank=True, default='')
+    description = models.TextField(verbose_name='Описание', blank=True, default=None,null=True)
 
     previous_evolution = models.ForeignKey(
         'self',  # ссылка на самого себя
@@ -45,7 +47,8 @@ class PokemonEntity(models.Model):
     appeared_at = models.DateTimeField(
         verbose_name='Время появления',
         null=True,
-        blank=True
+        blank=True,
+        default=None
     )
     disappeared_at = models.DateTimeField(
         verbose_name='Время исчезновения',
@@ -56,27 +59,32 @@ class PokemonEntity(models.Model):
     level = models.IntegerField(
         verbose_name='Уровень',
         null=True,
-        blank=True
+        blank=True,
+        default = None
     )
     health = models.IntegerField(
         verbose_name='Здоровье',
         null=True,
-        blank=True
+        blank=True,
+        default = None
     )
     attack = models.IntegerField(
         verbose_name='Атака',
         null=True,
-        blank=True
+        blank=True,
+        default=None
     )
     defense = models.IntegerField(
         verbose_name='Защита',
         null=True,
-        blank=True
+        blank=True,
+        default=None
     )
     stamina = models.IntegerField(
         verbose_name='Выносливость',
         null=True,
-        blank=True
+        blank=True,
+        default=None
     )
 
     class Meta:
