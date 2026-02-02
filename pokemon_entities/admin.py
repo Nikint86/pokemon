@@ -19,7 +19,22 @@ class PokemonAdmin(admin.ModelAdmin):
 
 @admin.register(PokemonEntity)
 class PokemonEntityAdmin(admin.ModelAdmin):
-    list_display = ('id', 'pokemon', 'lat', 'lon')
+    list_display = ('id', 'pokemon', 'lat', 'lon', 'appeared_at', 'disappeared_at')
     list_display_links = ('pokemon',)
-    list_filter = ('pokemon',)
+    list_filter = ('pokemon', 'appeared_at', 'disappeared_at')
     search_fields = ('pokemon__title',)
+
+
+    fieldsets = (
+        (None, {
+            'fields': ('pokemon',)
+        }),
+        ('Координаты', {
+            'fields': ('lat', 'lon'),
+            'classes': ('wide',)
+        }),
+        ('Время', {
+            'fields': ('appeared_at', 'disappeared_at'),
+            'classes': ('wide',)
+        }),
+    )

@@ -21,6 +21,17 @@ class PokemonEntity(models.Model):
     lat = models.FloatField(verbose_name='Широта')
     lon = models.FloatField(verbose_name='Долгота')
 
+    appeared_at = models.DateTimeField(
+        verbose_name='Время появления',
+        null=True,
+        blank=True
+    )
+    disappeared_at = models.DateTimeField(
+        verbose_name='Время исчезновения',
+        null=True,
+        blank=True
+    )
+
     class Meta:
         verbose_name = 'Покемон на карте'
         verbose_name_plural = 'Покемоны на карте'
