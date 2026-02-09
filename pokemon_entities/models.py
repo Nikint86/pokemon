@@ -6,13 +6,11 @@ class Pokemon(models.Model):
         max_length=200,
         verbose_name='Английское название',
         blank=True,
-        null=True,
     )
     title_jp = models.CharField(
         max_length=200,
         verbose_name='Японское название',
         blank=True,
-        null=True,
     )
     image = models.ImageField(upload_to='pokemon_images/', verbose_name='Изображение', null=True, blank=True)
     description = models.TextField(verbose_name='Описание', blank=True,null=True)
@@ -20,8 +18,8 @@ class Pokemon(models.Model):
     previous_evolution = models.ForeignKey(
         'self',  # ссылка на самого себя
         on_delete=models.SET_NULL,  # если предка удалят, ставим NULL
-        null=True,
         blank=True,
+        null=True,
         verbose_name='Из кого эволюционировал',
         related_name='next_evolutions'
     )
@@ -51,27 +49,22 @@ class PokemonEntity(models.Model):
 
     level = models.IntegerField(
         verbose_name='Уровень',
-        null=True,
         blank=True,
     )
     health = models.IntegerField(
         verbose_name='Здоровье',
-        null=True,
         blank=True,
     )
     attack = models.IntegerField(
         verbose_name='Атака',
-        null=True,
         blank=True,
     )
     defense = models.IntegerField(
         verbose_name='Защита',
-        null=True,
         blank=True,
     )
     stamina = models.IntegerField(
         verbose_name='Выносливость',
-        null=True,
         blank=True,
     )
 
